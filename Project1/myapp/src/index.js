@@ -3,6 +3,40 @@ import { createRoot } from "react-dom/client";
 import "./styles.css";
 import image from "./image.png";
 
+const skills = [
+  {
+    skill: "HTML+CSS",
+    level: "advanced",
+    color: "#2662EA"
+  },
+  {
+    skill: "JavaScript",
+    level: "advanced",
+    color: "#EFD81D"
+  },
+  {
+    skill: "Web Design",
+    level: "advanced",
+    color: "#C3DCAF"
+  },
+  {
+    skill: "Git and GitHub",
+    level: "intermediate",
+    color: "#E84F33"
+  },
+  {
+    skill: "React",
+    level: "advanced",
+    color: "#60DAFB"
+  },
+  {
+    skill: "Svelte",
+    level: "beginner",
+    color: "#FF3B00"
+  }
+];
+
+
 function App() {
   return (
     <div className="card">
@@ -13,12 +47,14 @@ function App() {
         {/* Should contain one Skill component
         for each web dev skill that you have,
         customized with props */}
-        <SkillList text="HTML+CSS 👍" backgroundColour="blue" />
+        {skills.map((skill) => (<SkillList skill={skill}/>))}
+
+        {/* <SkillList text="HTML+CSS 👍" backgroundColour="blue" />
         <SkillList text="Javascript 👍" backgroundColour="Yellow" />
         <SkillList text="web design 👍" backgroundColour="green" />
         <SkillList text="Git and Github 👍" backgroundColour="red" />
         <SkillList text="React 👍" backgroundColour="blue" />
-        <SkillList text="UiPath 👍" backgroundColour="red" />
+        <SkillList text="UiPath 👍" backgroundColour="red" /> */}
       </div>
     </div>
   );
@@ -34,10 +70,10 @@ function Intro() {
   just enjoy the Portuguese sun at the beach.</p>;
 }
 
-function SkillList(props) {
+function SkillList({skill}) {
   return (
-    <button style={{ backgroundColor : props.backgroundColour}}>
-      {props.text}
+    <button style={{ backgroundColor : skill.color}}>
+      {`${skill.skill} ${skill.level == "beginner" ? "👩‍🦲": skill.level == "intermediate" ? "👍":"💪"} `}
     </button>
   );
 }
