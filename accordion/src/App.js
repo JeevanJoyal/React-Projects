@@ -28,18 +28,20 @@ export default function App() {
 }
 
 function Accordion({data}) {
-  return <div className="accordion">
-    {data.map((item, idx) => <AccordionItem num={idx} title={item.title} text={item.text} />)}
+  const [curr, setCurr] = useState(0);
+
+  return <div className="accordion" key="Accordion">
+    {data.map((item, idx) => <AccordionItem curr={curr} setCurr={setCurr} num={idx} title={item.title} text={item.text} key={idx+1}/>)}
   </div>;
 }
 
-function AccordionItem({num, title, text}){
-  const [isOpen, setIsOpen] = useState(false);
+function AccordionItem({curr, setCurr, num, title, text}){
+  // const [isOpen, setIsOpen] = useState(false);
 
-  return <div className={isOpen ? "open item": "item"} onClick={() => setIsOpen(!isOpen)}>
+  return <div className={curr===num+1 ? "open item": "item"} onClick={() => setCurr(num+1)} >
     <p className="number">{num <= 9 ? `0${num+1}` : num+1}</p>
     <p className="title">{title}</p>
-    <p className="icon">{isOpen ? '-' : '+'}</p>
-    {isOpen && <p className="content-box">{text}</p>}
+    <p className="icon">{curr===num+1 ? '-' : '+'}</p>
+    {curr===num+1 && <p className="content-box">{text}</p>}
   </div>
 }
